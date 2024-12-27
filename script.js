@@ -30,7 +30,6 @@ habitForm.addEventListener('submit', (e) => {
     goalDays = parseInt(goalDaysInput.value, 10);
 
     if (habitName && goalDays > 0) {
-        alert(`Habit "${habitName}" added with a goal of ${goalDays} days!`);
         streak = 0;
         progress = 0;
         habitDays = new Array(30).fill(false); // Reset progress
