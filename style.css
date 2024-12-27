@@ -17,16 +17,16 @@ h1 {
 }
 form {
     display: flex;
+    flex-direction: column;
     gap: 10px;
 }
 input {
-    flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 button {
-    padding: 10px 20px;
+    padding: 10px;
     background-color: #007BFF;
     color: white;
     border: none;
@@ -36,14 +36,28 @@ button {
 button:hover {
     background-color: #0056b3;
 }
-ul {
-    list-style-type: none;
-    padding: 0;
+#habit-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 20px;
 }
-ul li {
-    padding: 10px;
+.day {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #ccc;
-    margin: 5px 0;
     border-radius: 4px;
     background-color: #f9f9f9;
+    cursor: pointer;
+}
+.day.completed {
+    background-color: #28a745;
+    color: white;
+}
+#habit-stats {
+    margin-top: 20px;
+    text-align: center;
 }
