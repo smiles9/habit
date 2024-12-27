@@ -95,3 +95,7 @@ habitForm.addEventListener('submit', (e) => {
         goalDaysInput.value = '';
     }
 });
+
+console.log("Calendar container:", calendarContainer);
+console.log("Goal Days:", goalDays);
+
