@@ -18,6 +18,11 @@ function generateCalendar() {
     const calendar = document.createElement('div');
     calendar.classList.add('calendar');
 
+    if (!goalDays || goalDays <= 0) {
+        console.error("Invalid goalDays:", goalDays);
+        return; // Stop if no valid goalDays
+    }
+
     for (let i = 0; i < goalDays; i++) {
         const currentDate = new Date(startDate);
         currentDate.setDate(startDate.getDate() + i);
@@ -34,6 +39,7 @@ function generateCalendar() {
 
     calendarContainer.innerHTML = ''; // Clear previous calendar
     calendarContainer.appendChild(calendar);
+    console.log("Calendar rendered successfully!");
 }
 
 // Toggle completion status for a day
@@ -63,9 +69,9 @@ function updateStats() {
     if (progress === goalDays) {
         encouragementDisplay.textContent = '🎉 Fantastic! You completed your goal! Keep it up!';
     } else if (streak > 5) {
-        encouragementDisplay.textContent = '🔥 Amazing streak! You're doing great!';
+        encouragementDisplay.textContent = '🔥 Amazing streak! You\'re doing great!';
     } else if (streak === 0) {
-        encouragementDisplay.textContent = '🌟 Let's get started! You can do it!';
+        encouragementDisplay.textContent = '🌟 Let\'s get started! You can do it!';
     } else {
         encouragementDisplay.textContent = '';
     }
