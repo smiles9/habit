@@ -17,6 +17,8 @@ const habits = {};
 function generateCalendar() {
     const calendar = document.createElement('div');
     calendar.classList.add('calendar');
+    console.log("Calendar HTML:", calendarContainer.innerHTML);
+
 
     if (!goalDays || goalDays <= 0) {
         console.error("Invalid goalDays:", goalDays);
