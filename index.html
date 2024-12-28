@@ -4,23 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habit Tracker</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Habit Tracker</h1>
-        <form id="habit-form">
-            <input type="text" id="habit-input" placeholder="Enter a habit" required>
-            <input type="number" id="goal-days" placeholder="Goal Days" required>
-            <button type="submit">Add Habit</button>
-        </form>
-        <div id="calendar-container"></div>
-        <div id="habit-stats">
-            <p id="streak">Streak: 0</p>
-            <p id="progress">Progress: 0/0</p>
-            <p id="encouragement"></p>
+    <!-- Auth Container -->
+    <div class="auth-container" id="auth-container">
+        <div class="auth-brand">
+            <h1>Habit Tracker</h1>
+            <p>Track your daily habits and achieve your goals</p>
+        </div>
+        
+        <!-- Login Form -->
+        <div class="auth-form" id="login-form">
+            <h2>Welcome Back</h2>
+            <form onsubmit="handleLogin(event)">
+                <input type="email" id="login-email" placeholder="Email address" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" onclick="togglePasswordRecovery()" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit">Sign In</button>
+            </form>
+            <p>Don't have an account? <a href="#" onclick="toggleAuthForm()">Create account</a></p>
+        </div>
+
+        <!-- Register Form -->
+        <div class="auth-form" id="register-form" style="display: none;">
+            <h2>Create Account</h2>
+            <form onsubmit="handleRegister(event)">
+                <input type="text" id="register-name" placeholder="Full name" required>
+                <input type="email" id="register-email" placeholder="Email address" required>
+                <input type="password" id="register-password" placeholder="Create password" required>
+                <input type="password" id="register-confirm-password" placeholder="Confirm password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="#" onclick="toggleAuthForm()">Sign in</a></p>
+        </div>
+
+        <!-- Password Recovery Form -->
+        <div class="auth-form" id="password-recovery-form" style="display: none;">
+            <h2>Reset Password</h2>
+            <p class="recovery-info">Enter your email address and we'll send you a link to reset your password.</p>
+            <form onsubmit="handlePasswordRecovery(event)">
+                <input type="email" id="recovery-email" placeholder="Email address" required>
+                <button type="submit">Send Reset Link</button>
+            </form>
+            <p><a href="#" onclick="togglePasswordRecovery()">Back to login</a></p>
         </div>
     </div>
-    <script src="script.js" defer></script>
+
+    <!-- Add this right after the auth-container div and before the main content -->
+    <div class="user-header" id="user-header" style="display: none;">
+        <div class="user-welcome">
+            <span>Welcome, <span id="user-name">User</span>!</span>
+        </div>
+        <button class="logout-btn" onclick="handleLogout()">Logout</button>
+    </div>
+
+    <!-- Main App Container (will be hidden until login) -->
+    <div class="container" id="app-container" style="display: none;">
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="track">Track & Manage</button>
+            <button class="tab-btn" data-tab="stats">Statistics</button>
+        </div>
+
+        <!-- Track & Manage Tab Content -->
+        <div class="tab-content" id="track-tab">
+            <!-- Calendar Container -->
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button id="prev-month" class="month-nav">&lt;</button>
+                    <h2 id="current-month"></h2>
+                    <button id="next-month" class="month-nav">&gt;</button>
+                </div>
+                <div class="calendar-grid">
+                    <div class="weekday">Sun</div>
+                    <div class="weekday">Mon</div>
+                    <div class="weekday">Tue</div>
+                    <div class="weekday">Wed</div>
+                    <div class="weekday">Thu</div>
+                    <div class="weekday">Fri</div>
+                    <div class="weekday">Sat</div>
+                </div>
+                <!-- This is the container for calendar days -->
+                <div id="calendar-days" class="calendar-days"></div>
+            </div>
+            
+            <h2 id="selected-date-header"></h2>
+            <div id="selected-date-habits" class="habits-list"></div>
+        </div>
+
+        <!-- Statistics Tab Content -->
+        <div class="tab-content" id="stats-tab" style="display: none;">
+            <div class="stats-overview">
+                <div class="stat-card" id="total-habits"></div>
+                <div class="stat-card" id="active-habits"></div>
+                <div class="stat-card" id="completed-today"></div>
+                <div class="stat-card" id="overall-success"></div>
+            </div>
+            <div id="habits-stats-list" class="habits-stats-list"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
