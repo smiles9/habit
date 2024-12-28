@@ -1,5 +1,5 @@
 // Version tracking
-const APP_VERSION = '1.0.0';// Import Firebase services (if in a module environment)
+const APP_VERSION = '1.0.0';
 
 // Initialize when document loads
 document.addEventListener('DOMContentLoaded', () => {
@@ -1014,28 +1014,4 @@ function handlePasswordRecovery(event) {
         successMessage.style.display = 'none';
         togglePasswordRecovery(); // Return to login form
     }, 5000);
-}
-
-// Import Firebase services (if in a module environment)
-const { auth, db } = window.firebaseServices;
-
-// Handle user registration
-function handleRegister(event) {
-    event.preventDefault();
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
-
-    auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            console.log("User registered:", userCredential.user);
-            // Save additional user info in Firestore
-            db.collection('users').doc(userCredential.user.uid).set({
-                email,
-                habits: []
-            });
-            showApp(userCredential.user);
-        })
-        .catch((error) => {
-            console.error("Registration error:", error.message);
-        });
 }
