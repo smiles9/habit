@@ -203,6 +203,44 @@ body {
     border: 2px solid #10B981;
 }
 
+/* Ensure the calendar fits within the parent container */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Seven columns for days */
+    gap: 5px;
+    width: 100%; /* Adjust to fit the parent container */
+    max-width: 100%; /* Prevent overflow on smaller screens */
+    box-sizing: border-box; /* Include padding/border in width calculation */
+    margin: 0 auto; /* Center align the calendar */
+}
+
+/* Adjust day size for smaller screens */
+.day {
+    width: 100%; /* Make width dynamic based on column size */
+    height: auto; /* Allow height to adjust based on width */
+    padding-top: 100%; /* Maintain a square aspect ratio */
+    position: relative; /* Enable positioning of inner content */
+}
+
+.day span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Specific adjustments for mobile screens */
+@media screen and (max-width: 768px) {
+    .calendar {
+        grid-template-columns: repeat(7, minmax(30px, 1fr)); /* Dynamic sizing for smaller screens */
+        gap: 3px; /* Reduce gap for better fit */
+    }
+    .day {
+        padding-top: 100%; /* Maintain square aspect ratio */
+    }
+}
+
+
 /* Habits List */
 .habits-list {
     display: flex;
