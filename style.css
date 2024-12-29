@@ -41,8 +41,9 @@ body {
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 1rem;
 }
 
@@ -138,11 +139,11 @@ body {
 
 /* Calendar Styles */
 .calendar-container {
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .calendar-header {
@@ -155,21 +156,21 @@ body {
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.5rem;
+    gap: 2px;
+    width: 100%;
 }
 
 .weekday {
     text-align: center;
-    font-weight: 500;
-    color: #6B7280;
     padding: 0.5rem;
+    font-size: 0.9rem;
 }
 
-#calendar-days {
+.calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.5rem;
-    grid-column: 1 / -1;
+    gap: 2px;
+    width: 100%;
 }
 
 .calendar-day {
@@ -182,7 +183,10 @@ body {
     transition: all 0.2s ease;
     font-weight: 500;
     background: #F3F4F6;
-    padding: 1rem;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    width: 100%;
+    min-width: 0;
 }
 
 .calendar-day:hover {
@@ -1776,4 +1780,37 @@ canvas {
     margin-bottom: 1rem;
     display: none;
     text-align: center;
+} 
+
+/* Add media query for mobile devices */
+@media screen and (max-width: 480px) {
+    .calendar-container {
+        padding: 0.5rem;
+    }
+    
+    .weekday {
+        font-size: 0.8rem;
+        padding: 2px;
+    }
+    
+    .calendar-days .day {
+        font-size: 0.9rem;
+        padding: 5px;
+    }
+} 
+
+/* Add media query for smaller screens */
+@media screen and (max-width: 768px) {
+    .calendar-container {
+        padding: 0.5rem;
+    }
+    
+    .weekday {
+        font-size: 0.8rem;
+        padding: 0.25rem;
+    }
+    
+    .calendar-day {
+        font-size: 0.8rem;
+    }
 } 
